@@ -80,9 +80,21 @@ export default function SplashScreen() {
           boxShadow: "0 8px 80px rgba(59,130,246,0.12), inset 0 1px 0 rgba(255,255,255,0.08)",
         }}
       >
-        {/* Logo */}
-        <div className="mb-10">
-          <StreamMateLogo size={90} showText={true} showTag={true} textSize="text-4xl" glowColor="rgba(99,102,241,0.9)" />
+        {/* Logo image */}
+        <div className="mb-6 flex flex-col items-center gap-4">
+          <img
+            src="https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/0a4d0dc43_generated_image.png"
+            alt="StreamMate"
+            className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl"
+            style={{ filter: "drop-shadow(0 0 28px rgba(99,102,241,0.85))" }}
+          />
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-baseline gap-0 text-4xl font-black" style={{ letterSpacing: "-0.5px" }}>
+              <span className="text-white">Stream</span>
+              <span style={{ background: "linear-gradient(135deg, #3b82f6, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Mate</span>
+            </div>
+            <p className="text-xs tracking-widest" style={{ color: "rgba(148,163,184,0.7)", letterSpacing: "0.22em" }}>YOUR WORLD. YOUR STREAM.</p>
+          </div>
         </div>
 
         {/* Loading bar */}
