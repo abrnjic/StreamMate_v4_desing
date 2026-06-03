@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Play, Search, Users } from "lucide-react";
+import DetailPanel from "@/components/streammate/DetailPanel";
 
 function ChannelRow({ ch, index, accentColor }) {
   return (
@@ -69,6 +70,7 @@ function ChannelRow({ ch, index, accentColor }) {
 
 export default function ChannelPanel({ bouquet, onShowGrid }) {
   const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState(null);
 
   const filtered = bouquet.channels.filter(c =>
     c.name.toLowerCase().includes(search.toLowerCase())
@@ -155,7 +157,9 @@ export default function ChannelPanel({ bouquet, onShowGrid }) {
         <div className="h-px mb-4 rounded-full" style={{ background: `linear-gradient(90deg, ${bouquet.color}60, transparent)` }} />
 
         {filtered.map((ch, i) => (
-          <ChannelRow key={ch.id} ch={ch} index={i} accentColor={bouquet.color} />
+          <div key={ch.id} onClick={() => setSelected(ch)}>
+            <ChannelRow ch={ch} index={i} accentColor={bouquet.color} />
+          </div>
         ))}
 
         {filtered.length === 0 && (
@@ -164,6 +168,10 @@ export default function ChannelPanel({ bouquet, onShowGrid }) {
           </div>
         )}
       </div>
+
+      {selected && (
+        <DetailPanel item={selected} type="channel" onClose={() => setSelected(null)} />
+      )}
     </div>
   );
 }

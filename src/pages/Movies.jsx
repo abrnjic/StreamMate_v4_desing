@@ -2,6 +2,7 @@ import { useState } from "react";
 import NavBar from "@/components/streammate/NavBar";
 import { Play, Star, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import DetailPanel from "@/components/streammate/DetailPanel";
 
 const genres = ["Sve", "Akcija", "Drama", "Komedija", "Sci-Fi", "Thriller", "Horror", "Romantika", "Animacija"];
 
@@ -26,6 +27,7 @@ export default function Movies() {
   const navigate = useNavigate();
   const [activeGenre, setActiveGenre] = useState("Sve");
   const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState(null);
 
   const handleNav = (id) => {
     if (id === "live") navigate("/live-tv");
@@ -160,6 +162,7 @@ export default function Movies() {
               key={movie.id}
               className="rounded-xl overflow-hidden cursor-pointer group"
               style={{ transition: "transform 0.2s, box-shadow 0.2s" }}
+              onClick={() => setSelected(movie)}
               onMouseEnter={e => {
                 e.currentTarget.style.transform = "scale(1.05)";
                 e.currentTarget.style.boxShadow = `0 0 24px ${movie.color}44`;
@@ -210,6 +213,10 @@ export default function Movies() {
           ))}
         </div>
       </div>
+
+      {selected && (
+        <DetailPanel item={selected} type="movie" onClose={() => setSelected(null)} />
+      )}
     </div>
   );
 }
