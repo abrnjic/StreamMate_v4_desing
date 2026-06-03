@@ -3,6 +3,7 @@ import NavBar from "@/components/streammate/NavBar";
 import { Play, Star, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import DetailPanel from "@/components/streammate/DetailPanel";
+import VideoPreviewCard from "@/components/streammate/VideoPreviewCard";
 
 const genres = ["Sve", "Drama", "Thriller", "Komedija", "Sci-Fi", "Kriminalistika", "Fantazija", "Dokumentarac"];
 
@@ -155,62 +156,12 @@ export default function Series() {
         <p className="text-slate-400 text-sm mb-4">{filtered.length} serija</p>
         <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(155px, 1fr))" }}>
           {filtered.map(s => (
-            <div
+            <VideoPreviewCard
               key={s.id}
-              className="rounded-xl overflow-hidden cursor-pointer group"
-              style={{ transition: "transform 0.2s, box-shadow 0.2s" }}
+              item={s}
+              type="series"
               onClick={() => setSelected(s)}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = "scale(1.04)";
-                e.currentTarget.style.boxShadow = `0 0 24px ${s.color}44`;
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            >
-              <div
-                className="relative flex items-center justify-center"
-                style={{ height: "200px", background: `linear-gradient(160deg, ${s.color}44 0%, #0d1b3e 100%)` }}
-              >
-                <span className="text-6xl font-black opacity-10 text-white absolute">{s.id}</span>
-                <div
-                  className="opacity-0 group-hover:opacity-100 transition-opacity absolute inset-0 flex items-center justify-center"
-                  style={{ background: "rgba(0,0,0,0.5)" }}
-                >
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ background: "rgba(139,92,246,0.8)", boxShadow: "0 0 20px rgba(139,92,246,0.5)" }}
-                  >
-                    <Play size={20} fill="white" className="text-white ml-0.5" />
-                  </div>
-                </div>
-                <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold text-white"
-                  style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)" }}>
-                  <Star size={10} fill="#fbbf24" className="text-yellow-400" /> {s.rating}
-                </div>
-                <div
-                  className="absolute top-2 left-2 text-xs font-bold px-2 py-0.5 rounded-full"
-                  style={{
-                    background: s.status === "U tijeku" ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.1)",
-                    color: s.status === "U tijeku" ? "#60a5fa" : "#94a3b8",
-                    border: s.status === "U tijeku" ? "1px solid rgba(59,130,246,0.3)" : "1px solid rgba(255,255,255,0.1)",
-                  }}
-                >
-                  {s.status === "U tijeku" ? "● NOVO" : "✓"}
-                </div>
-              </div>
-              <div className="p-2.5" style={{ background: "rgba(10,16,40,0.95)" }}>
-                <p className="text-white text-xs font-semibold truncate">{s.title}</p>
-                <div className="flex items-center justify-between mt-1">
-                  <span className="text-slate-400 text-xs">S{s.seasons} · {s.episodes}ep</span>
-                  <span className="text-xs px-1.5 py-0.5 rounded font-medium"
-                    style={{ background: `${s.color}22`, color: s.color }}>
-                    {s.genre}
-                  </span>
-                </div>
-              </div>
-            </div>
+            />
           ))}
         </div>
       </div>
