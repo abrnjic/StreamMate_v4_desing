@@ -25,7 +25,12 @@ export default function NavBar({ active, onSelect }) {
       >
         {/* Logo */}
         <div className="mr-8">
-          <StreamMateLogo size={32} showText={true} textSize="text-lg" glowColor="rgba(99,102,241,0.6)" />
+          <img
+            src="https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/675135202_generated_image.png"
+            alt="StreamMate"
+            className="h-10"
+            style={{ filter: "drop-shadow(0 0 10px rgba(99,102,241,0.7))" }}
+          />
         </div>
 
         {/* Nav items */}
@@ -82,7 +87,12 @@ export default function NavBar({ active, onSelect }) {
           borderBottom: "1px solid rgba(59, 130, 246, 0.12)",
         }}
       >
-        <StreamMateLogo size={26} showText={true} textSize="text-base" glowColor="rgba(99,102,241,0.6)" />
+        <img
+            src="https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/675135202_generated_image.png"
+            alt="StreamMate"
+            className="h-8"
+            style={{ filter: "drop-shadow(0 0 10px rgba(99,102,241,0.7))" }}
+          />
         <div className="flex items-center gap-2">
           <button className="p-2 rounded-lg text-slate-400" style={{ background: "rgba(255,255,255,0.07)" }}>
             <Search size={17} />
