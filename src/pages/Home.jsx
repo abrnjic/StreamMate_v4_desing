@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import NavBar from "@/components/streammate/NavBar";
 import HeroBanner from "@/components/streammate/HeroBanner";
 import ContentRow from "@/components/streammate/ContentRow";
@@ -30,7 +31,14 @@ function SectionHeader({ label, sub }) {
 }
 
 export default function Home() {
-  const [activeNav, setActiveNav] = useState("live");
+  const navigate = useNavigate();
+  const [activeNav, setActiveNav] = useState("home");
+
+  const handleNav = (id) => {
+    if (id === "live") navigate("/live-tv");
+    else if (id === "movies") navigate("/movies");
+    else if (id === "series") navigate("/series");
+  };
 
   return (
     <div
@@ -38,7 +46,7 @@ export default function Home() {
       style={{ background: "linear-gradient(180deg, #060a18 0%, #080c20 100%)" }}
     >
       {/* Navigation */}
-      <NavBar active={activeNav} onSelect={setActiveNav} />
+      <NavBar active={activeNav} onSelect={handleNav} />
 
       {/* Hero Banner */}
       <HeroBanner />
