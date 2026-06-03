@@ -1,4 +1,5 @@
 import { Tv, Film, Clapperboard, Heart, Video, Settings, Search, Bell } from "lucide-react";
+import StreamMateLogo from "@/components/streammate/StreamMateLogo";
 
 const navItems = [
   { icon: Tv, label: "Live TV", id: "live" },
@@ -21,28 +22,8 @@ export default function NavBar({ active, onSelect }) {
       }}
     >
       {/* Logo */}
-      <div className="flex items-center gap-2 mr-8">
-        <div style={{ filter: "drop-shadow(0 0 8px rgba(99,102,241,0.6))" }}>
-          <svg width="28" height="28" viewBox="0 0 80 80" fill="none">
-            <defs>
-              <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#3b82f6" />
-                <stop offset="100%" stopColor="#8b5cf6" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M20 16 C20 16, 55 12, 58 28 C61 40, 38 42, 40 52 C42 62, 62 64, 62 64"
-              stroke="url(#navLogoGrad)"
-              strokeWidth="10"
-              strokeLinecap="round"
-              fill="none"
-            />
-            <path d="M45 32 L65 45 L45 58 Z" fill="url(#navLogoGrad)" opacity="0.9" />
-          </svg>
-        </div>
-        <span className="font-bold text-white text-lg">
-          Stream<span style={{ color: "#3b82f6" }}>Mate</span>
-        </span>
+      <div className="mr-8">
+        <StreamMateLogo size={32} showText={true} textSize="text-lg" glowColor="rgba(99,102,241,0.6)" />
       </div>
 
       {/* Nav items */}

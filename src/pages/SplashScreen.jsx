@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import StreamMateLogo from "@/components/streammate/StreamMateLogo";
 
 export default function SplashScreen() {
   const navigate = useNavigate();
@@ -80,57 +81,10 @@ export default function SplashScreen() {
           minWidth: "420px",
         }}
       >
-        {/* Logo icon */}
-        <div className="mb-6" style={{ filter: "drop-shadow(0 0 24px rgba(99,102,241,0.8))" }}>
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-            <defs>
-              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#3b82f6" />
-                <stop offset="50%" stopColor="#6366f1" />
-                <stop offset="100%" stopColor="#8b5cf6" />
-              </linearGradient>
-            </defs>
-            {/* S + Play hybrid icon */}
-            <path
-              d="M20 16 C20 16, 55 12, 58 28 C61 40, 38 42, 40 52 C42 62, 62 64, 62 64"
-              stroke="url(#logoGrad)"
-              strokeWidth="10"
-              strokeLinecap="round"
-              fill="none"
-            />
-            <path d="M45 32 L65 45 L45 58 Z" fill="url(#logoGrad)" opacity="0.9" />
-          </svg>
+        {/* Logo */}
+        <div className="mb-10">
+          <StreamMateLogo size={90} showText={true} showTag={true} textSize="text-4xl" glowColor="rgba(99,102,241,0.9)" />
         </div>
-
-        {/* Brand name */}
-        <div className="mb-2 flex items-baseline gap-0">
-          <span
-            className="text-4xl font-bold text-white"
-            style={{ fontFamily: "system-ui, sans-serif", letterSpacing: "-0.5px" }}
-          >
-            Stream
-          </span>
-          <span
-            className="text-4xl font-bold"
-            style={{
-              background: "linear-gradient(135deg, #3b82f6, #6366f1)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              letterSpacing: "-0.5px",
-            }}
-          >
-            Mate
-          </span>
-        </div>
-
-        {/* Tagline */}
-        <p
-          className="text-xs mb-10 tracking-widest"
-          style={{ color: "rgba(148, 163, 184, 0.8)", letterSpacing: "0.25em" }}
-        >
-          YOUR WORLD. YOUR STREAM.
-        </p>
 
         {/* Loading bar */}
         <div className="w-full">

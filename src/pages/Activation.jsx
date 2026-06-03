@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tv, Wifi, Shield, Zap, ChevronRight, Globe, Settings } from "lucide-react";
+import StreamMateLogo from "@/components/streammate/StreamMateLogo";
 
 const languages = [
   { code: "HR", flag: "🇭🇷", name: "Hrvatski" },
@@ -76,26 +77,9 @@ export default function Activation() {
         }}
       >
         {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <div style={{ filter: "drop-shadow(0 0 10px rgba(99,102,241,0.7))" }}>
-            <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
-              <defs>
-                <linearGradient id="actLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3b82f6" />
-                  <stop offset="50%" stopColor="#6366f1" />
-                  <stop offset="100%" stopColor="#8b5cf6" />
-                </linearGradient>
-              </defs>
-              <path d="M20 16 C20 16, 55 12, 58 28 C61 40, 38 42, 40 52 C42 62, 62 64, 62 64" stroke="url(#actLogoGrad)" strokeWidth="10" strokeLinecap="round" fill="none" />
-              <path d="M45 32 L65 45 L45 58 Z" fill="url(#actLogoGrad)" opacity="0.9" />
-            </svg>
-          </div>
-          <div>
-            <span className="font-black text-white text-lg tracking-tight">
-              Stream<span style={{ color: "#3b82f6" }}>Mate</span>
-            </span>
-            <span className="text-slate-500 text-xs ml-1.5 font-medium">v4.2</span>
-          </div>
+        <div className="flex items-center gap-2">
+          <StreamMateLogo size={32} showText={true} textSize="text-lg" glowColor="rgba(99,102,241,0.7)" />
+          <span className="text-slate-500 text-xs font-medium">v4.2</span>
         </div>
 
         {/* Language switcher */}
