@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StreamMateLogo from "@/components/streammate/StreamMateLogo";
+import BrandLogo from "@/components/streammate/BrandLogo";
 
 export default function SplashScreen() {
   const navigate = useNavigate();
@@ -81,13 +81,14 @@ export default function SplashScreen() {
         }}
       >
         {/* Logo */}
-        <div className="mb-6 flex flex-col items-center">
-          <img
-            src="https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/404713f61_generated_image.png"
-            alt="StreamMate"
-            className="w-56 sm:w-64"
-            style={{ filter: "drop-shadow(0 0 32px rgba(99,102,241,0.7))" }}
-          />
+        <div className="mb-8 flex flex-col items-center gap-3">
+          <BrandLogo variant="full" height={72} />
+          <p
+            className="text-xs tracking-widest"
+            style={{ color: "rgba(148,163,184,0.6)", letterSpacing: "0.22em" }}
+          >
+            YOUR WORLD. YOUR STREAM.
+          </p>
         </div>
 
         {/* Loading bar */}

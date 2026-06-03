@@ -1,5 +1,5 @@
 import { Tv, Film, Clapperboard, Heart, Video, Settings, Search, Bell } from "lucide-react";
-import StreamMateLogo from "@/components/streammate/StreamMateLogo";
+import BrandLogo from "@/components/streammate/BrandLogo";
 
 const navItems = [
   { icon: Tv, label: "Live TV", id: "live" },
@@ -17,20 +17,15 @@ export default function NavBar({ active, onSelect }) {
       <div
         className="sticky top-0 z-50 w-full hidden md:flex items-center justify-between px-6 py-3"
         style={{
-          background: "rgba(6, 10, 24, 0.85)",
+          background: "rgba(6, 10, 24, 0.90)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(59, 130, 246, 0.12)",
+          borderBottom: "1px solid rgba(99, 102, 241, 0.2)",
         }}
       >
         {/* Logo */}
-        <div className="mr-8">
-          <img
-            src="https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/404713f61_generated_image.png"
-            alt="StreamMate"
-            className="h-9"
-            style={{ filter: "drop-shadow(0 0 12px rgba(99,102,241,0.9)) brightness(1.2)" }}
-          />
+        <div className="mr-8 flex-shrink-0">
+          <BrandLogo variant="full" height={42} />
         </div>
 
         {/* Nav items */}
@@ -81,18 +76,13 @@ export default function NavBar({ active, onSelect }) {
       <div
         className="sticky top-0 z-50 w-full flex md:hidden items-center justify-between px-4 py-3"
         style={{
-          background: "rgba(6, 10, 24, 0.92)",
+          background: "rgba(6, 10, 24, 0.95)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(59, 130, 246, 0.12)",
+          borderBottom: "1px solid rgba(99, 102, 241, 0.2)",
         }}
       >
-        <img
-            src="https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/404713f61_generated_image.png"
-            alt="StreamMate"
-            className="h-8"
-            style={{ filter: "drop-shadow(0 0 12px rgba(99,102,241,0.9)) brightness(1.2)" }}
-          />
+        <BrandLogo variant="full" height={36} />
         <div className="flex items-center gap-2">
           <button className="p-2 rounded-lg text-slate-400" style={{ background: "rgba(255,255,255,0.07)" }}>
             <Search size={17} />
