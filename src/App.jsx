@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import LiveTV from "./pages/LiveTV";
 import Movies from "./pages/Movies";
 import Series from "./pages/Series";
+import Activation from "./pages/Activation";
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -45,6 +46,7 @@ const AuthenticatedApp = () => {
       <Route path="/live-tv" element={<LiveTV />} />
       <Route path="/movies" element={<Movies />} />
       <Route path="/series" element={<Series />} />
+      <Route path="/activation" element={<Activation />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
