@@ -14,6 +14,7 @@ import Movies from "./pages/Movies";
 import Series from "./pages/Series";
 import Activation from "./pages/Activation";
 import MarketingKit from "./pages/MarketingKit";
+import Roadmap from "./pages/Roadmap";
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -49,6 +50,7 @@ const AuthenticatedApp = () => {
       <Route path="/series" element={<Series />} />
       <Route path="/activation" element={<Activation />} />
       <Route path="/marketing-kit" element={<MarketingKit />} />
+      <Route path="/roadmap" element={<Roadmap />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
