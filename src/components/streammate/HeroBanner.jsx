@@ -10,7 +10,7 @@ const heroContent = [
     tag: "LIVE",
     tagColor: "#ef4444",
     channel: "HRT 1",
-    bg: "https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/50ec2b75a_generated_image.png",
+    bg: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1400&q=80",
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const heroContent = [
     tag: "HD",
     tagColor: "#3b82f6",
     channel: "Nova TV",
-    bg: "https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/50ec2b75a_generated_image.png",
+    bg: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1400&q=80",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const heroContent = [
     tag: "SPORT",
     tagColor: "#10b981",
     channel: "Sport Klub",
-    bg: "https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/50ec2b75a_generated_image.png",
+    bg: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1400&q=80",
   },
 ];
 
