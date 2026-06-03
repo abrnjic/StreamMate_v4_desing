@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "@/components/streammate/NavBar";
 import HeroBanner from "@/components/streammate/HeroBanner";
 import ContentRow from "@/components/streammate/ContentRow";
+import CategoryGrid from "@/components/streammate/CategoryGrid";
 import { ChevronRight } from "lucide-react";
 
 const sections = [
@@ -50,6 +51,12 @@ export default function Home() {
 
       {/* Hero Banner */}
       <HeroBanner />
+
+      {/* Category grid with glassmorphism */}
+      <CategoryGrid onSelect={handleNav} />
+
+      {/* Divider */}
+      <div className="mx-4 sm:mx-6 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
 
       {/* Content sections */}
       <div className="px-3 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-10">
