@@ -43,6 +43,7 @@ export default function Home() {
     if (id === "live") navigate("/live-tv");
     else if (id === "movies") navigate("/movies");
     else if (id === "series") navigate("/series");
+    else if (id === "roadmap") navigate("/roadmap");
   };
 
   return (

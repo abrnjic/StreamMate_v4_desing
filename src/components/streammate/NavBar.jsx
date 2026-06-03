@@ -1,4 +1,4 @@
-import { Tv, Film, Clapperboard, Heart, Video, Settings, Search, Bell } from "lucide-react";
+import { Tv, Film, Clapperboard, Heart, Video, Settings, Search, Bell, Github } from "lucide-react";
 import BrandLogo from "@/components/streammate/BrandLogo";
 import ProfileMenu from "@/components/streammate/ProfileMenu";
 
@@ -8,6 +8,7 @@ const navItems = [
   { icon: Clapperboard, label: "Serije", id: "series" },
   { icon: Heart, label: "Favoriti", id: "favorites" },
   { icon: Video, label: "Snimke", id: "recordings" },
+  { icon: Github, label: "Roadmap", id: "roadmap" },
   { icon: Settings, label: "Postavke", id: "settings" },
 ];
 
