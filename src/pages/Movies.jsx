@@ -1,6 +1,6 @@
 import { useState } from "react";
 import NavBar from "@/components/streammate/NavBar";
-import { Play, Star, Filter, Search, ChevronDown } from "lucide-react";
+import { Play, Star, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const genres = ["Sve", "Akcija", "Drama", "Komedija", "Sci-Fi", "Thriller", "Horror", "Romantika", "Animacija"];
@@ -86,26 +86,50 @@ export default function Movies() {
         </div>
       </div>
 
-      {/* Search + Filter bar */}
-      <div className="px-6 py-4 flex items-center gap-4">
+      {/* Search bar — glassmorphism sticky */}
+      <div
+        className="sticky z-20 px-4 sm:px-6 py-3"
+        style={{
+          top: 0,
+          background: "rgba(6,10,24,0.65)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
         <div
-          className="flex-1 flex items-center gap-2 px-4 py-2.5 rounded-xl"
-          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}
+          className="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300"
+          style={{
+            background: "rgba(255,255,255,0.05)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+          onFocusCapture={e => {
+            e.currentTarget.style.borderColor = "rgba(59,130,246,0.5)";
+            e.currentTarget.style.boxShadow = "0 0 0 1px rgba(59,130,246,0.3), 0 0 24px rgba(59,130,246,0.15)";
+          }}
+          onBlurCapture={e => {
+            e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+            e.currentTarget.style.boxShadow = "none";
+          }}
         >
-          <Search size={16} className="text-slate-400" />
+          <Search size={16} className="text-slate-400 flex-shrink-0" />
           <input
             className="bg-transparent text-white text-sm flex-1 outline-none placeholder-slate-500"
             placeholder="Pretraži filmove..."
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
+          {search && (
+            <button
+              onClick={() => setSearch("")}
+              className="text-slate-500 hover:text-slate-300 transition-colors text-xs flex-shrink-0"
+            >
+              ✕
+            </button>
+          )}
         </div>
-        <button
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-slate-300"
-          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}
-        >
-          <Filter size={15} /> Filtriraj <ChevronDown size={14} />
-        </button>
       </div>
 
       {/* Genre tabs */}
