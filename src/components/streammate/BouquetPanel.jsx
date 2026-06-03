@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tv, Globe, Trophy, Music, Film, Baby, Zap, Newspaper, Play, Circle, ChevronRight, Search } from "lucide-react";
+import { Play, Search, ArrowLeft, Wifi, Users, ChevronRight } from "lucide-react";
 
 const bouquets = [
   {
@@ -8,6 +8,7 @@ const bouquets = [
     icon: "🇭🇷",
     description: "Hrvatska televizija",
     color: "#3b82f6",
+    glow: "rgba(59,130,246,0.35)",
     count: 42,
     channels: [
       { id: 1, name: "HRT 1", isLive: true, viewers: "12K", program: "Dnevnik", color: "#3b82f6" },
@@ -25,6 +26,7 @@ const bouquets = [
     icon: "⚽",
     description: "Sportski kanali",
     color: "#10b981",
+    glow: "rgba(16,185,129,0.35)",
     count: 28,
     channels: [
       { id: 1, name: "Sport Klub 1", isLive: true, viewers: "22K", program: "Premijer liga", color: "#10b981" },
@@ -43,6 +45,7 @@ const bouquets = [
     icon: "📰",
     description: "Informativni kanali",
     color: "#f59e0b",
+    glow: "rgba(245,158,11,0.35)",
     count: 18,
     channels: [
       { id: 1, name: "Al Jazeera", isLive: true, viewers: "5K", program: "Breaking News", color: "#f59e0b" },
@@ -59,6 +62,7 @@ const bouquets = [
     icon: "🎬",
     description: "Filmski kanali",
     color: "#8b5cf6",
+    glow: "rgba(139,92,246,0.35)",
     count: 35,
     channels: [
       { id: 1, name: "HBO", isLive: true, viewers: "31K", program: "House of Dragon", color: "#dc2626" },
@@ -75,6 +79,7 @@ const bouquets = [
     icon: "🧒",
     description: "Za djecu",
     color: "#ec4899",
+    glow: "rgba(236,72,153,0.35)",
     count: 15,
     channels: [
       { id: 1, name: "Cartoon Network", isLive: true, viewers: "19K", program: "Gumball", color: "#f59e0b" },
@@ -89,7 +94,8 @@ const bouquets = [
     name: "Muzika",
     icon: "🎵",
     description: "Glazbeni kanali",
-    color: "#ec4899",
+    color: "#a855f7",
+    glow: "rgba(168,85,247,0.35)",
     count: 12,
     channels: [
       { id: 1, name: "MTV", isLive: true, viewers: "11K", program: "Music Charts", color: "#ec4899" },
@@ -104,6 +110,7 @@ const bouquets = [
     icon: "🌍",
     description: "Balkanski kanali",
     color: "#6366f1",
+    glow: "rgba(99,102,241,0.35)",
     count: 55,
     channels: [
       { id: 1, name: "RTS 1", isLive: true, viewers: "8K", program: "Vijesti RTS", color: "#ef4444" },
@@ -120,6 +127,7 @@ const bouquets = [
     icon: "🌐",
     description: "Svjetski kanali",
     color: "#0891b2",
+    glow: "rgba(8,145,178,0.35)",
     count: 48,
     channels: [
       { id: 1, name: "Sky One", isLive: true, viewers: "14K", program: "Premier Show", color: "#3b82f6" },
@@ -131,56 +139,174 @@ const bouquets = [
   },
 ];
 
+// ─── Bouquet Card ────────────────────────────────────────────────────────────
+function BouquetCard({ bouquet, onSelect }) {
+  const liveCount = bouquet.channels.filter(c => c.isLive).length;
+
+  return (
+    <div
+      className="group relative rounded-2xl cursor-pointer overflow-hidden"
+      style={{
+        background: "rgba(13, 20, 45, 0.55)",
+        backdropFilter: "blur(18px)",
+        WebkitBackdropFilter: "blur(18px)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.transform = "translateY(-5px)";
+        e.currentTarget.style.boxShadow = `0 16px 48px ${bouquet.glow}`;
+        e.currentTarget.style.borderColor = `${bouquet.color}55`;
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = "none";
+        e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+      }}
+      onClick={() => onSelect(bouquet)}
+    >
+      {/* Top gradient line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: `linear-gradient(90deg, transparent, ${bouquet.color}99, transparent)` }}
+      />
+
+      {/* Inner glow on hover */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse at top, ${bouquet.color}0d 0%, transparent 70%)` }}
+      />
+
+      <div className="relative p-5">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-4">
+          <div
+            className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
+            style={{
+              background: `${bouquet.color}18`,
+              border: `1px solid ${bouquet.color}33`,
+              boxShadow: `0 0 20px ${bouquet.color}22`,
+            }}
+          >
+            {bouquet.icon}
+          </div>
+          <div
+            className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-bold"
+            style={{ background: "rgba(239,68,68,0.15)", color: "#ef4444", border: "1px solid rgba(239,68,68,0.2)" }}
+          >
+            <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+            {liveCount} LIVE
+          </div>
+        </div>
+
+        {/* Title & desc */}
+        <h3 className="text-white font-bold text-base mb-0.5">{bouquet.name}</h3>
+        <p className="text-slate-400 text-xs mb-4">{bouquet.description}</p>
+
+        {/* Preview channels */}
+        <div className="space-y-1.5 mb-4">
+          {bouquet.channels.slice(0, 3).map(ch => (
+            <div key={ch.id} className="flex items-center gap-2">
+              <div
+                className="w-5 h-5 rounded-md flex items-center justify-center text-xs font-black text-white flex-shrink-0"
+                style={{ background: `${ch.color}33` }}
+              >
+                {ch.name[0]}
+              </div>
+              <span className="text-slate-300 text-xs truncate flex-1">{ch.name}</span>
+              <span className="text-slate-500 text-xs truncate hidden sm:block">{ch.program}</span>
+            </div>
+          ))}
+          {bouquet.channels.length > 3 && (
+            <p className="text-slate-500 text-xs pl-7">+{bouquet.channels.length - 3} više kanala</p>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <Wifi size={12} style={{ color: bouquet.color }} />
+            <span className="text-xs font-semibold" style={{ color: bouquet.color }}>
+              {bouquet.count} kanala
+            </span>
+          </div>
+          <div
+            className="flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all group-hover:opacity-100"
+            style={{
+              background: `${bouquet.color}18`,
+              color: bouquet.color,
+              border: `1px solid ${bouquet.color}33`,
+              opacity: 0.7,
+            }}
+          >
+            Otvori <ChevronRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Channel Row ─────────────────────────────────────────────────────────────
 function ChannelRow({ ch, index }) {
   return (
     <div
-      className="flex items-center gap-4 p-3 rounded-xl cursor-pointer group transition-all"
+      className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl cursor-pointer group"
       style={{
-        background: "rgba(255,255,255,0.02)",
-        border: "1px solid rgba(255,255,255,0.04)",
-        transition: "background 0.15s, transform 0.15s",
+        background: "rgba(13,20,45,0.5)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid rgba(255,255,255,0.05)",
+        transition: "background 0.2s, border-color 0.2s, transform 0.2s",
       }}
       onMouseEnter={e => {
         e.currentTarget.style.background = "rgba(59,130,246,0.08)";
         e.currentTarget.style.borderColor = "rgba(59,130,246,0.2)";
+        e.currentTarget.style.transform = "translateX(4px)";
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.04)";
+        e.currentTarget.style.background = "rgba(13,20,45,0.5)";
+        e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
+        e.currentTarget.style.transform = "translateX(0)";
       }}
     >
-      {/* Number */}
-      <span className="text-slate-600 text-xs w-5 text-right font-mono">{index + 1}</span>
+      <span className="text-slate-600 text-xs w-5 text-right font-mono flex-shrink-0">{index + 1}</span>
 
-      {/* Channel logo placeholder */}
       <div
-        className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-xs text-white"
-        style={{ background: `linear-gradient(135deg, ${ch.color}44, ${ch.color}22)`, border: `1px solid ${ch.color}33` }}
+        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 font-black text-sm text-white"
+        style={{
+          background: `linear-gradient(135deg, ${ch.color}55, ${ch.color}22)`,
+          border: `1px solid ${ch.color}44`,
+          boxShadow: `0 0 12px ${ch.color}22`,
+        }}
       >
         {ch.name.substring(0, 2).toUpperCase()}
       </div>
 
-      {/* Info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <span className="text-white text-sm font-semibold truncate">{ch.name}</span>
           {ch.isLive && (
-            <div className="flex items-center gap-1">
+            <span
+              className="flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-bold flex-shrink-0"
+              style={{ background: "rgba(239,68,68,0.15)", color: "#ef4444" }}
+            >
               <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-red-400 text-xs font-bold">LIVE</span>
-            </div>
+              LIVE
+            </span>
           )}
         </div>
         <p className="text-slate-400 text-xs truncate mt-0.5">{ch.program}</p>
       </div>
 
-      {/* Viewers */}
-      <span className="text-slate-500 text-xs hidden sm:block">{ch.viewers}</span>
+      <div className="hidden sm:flex items-center gap-1 text-slate-500 text-xs">
+        <Users size={11} />
+        {ch.viewers}
+      </div>
 
-      {/* Play button */}
       <div
-        className="w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-        style={{ background: "rgba(59,130,246,0.3)", border: "1px solid rgba(59,130,246,0.4)" }}
+        className="w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+        style={{ background: "rgba(59,130,246,0.25)", border: "1px solid rgba(59,130,246,0.4)" }}
       >
         <Play size={12} fill="white" className="text-white ml-0.5" />
       </div>
@@ -188,153 +314,113 @@ function ChannelRow({ ch, index }) {
   );
 }
 
-export default function BouquetPanel({ selectedBouquet, onSelectBouquet }) {
+// ─── Channel View ─────────────────────────────────────────────────────────────
+function ChannelView({ bouquet, onBack }) {
   const [search, setSearch] = useState("");
-
-  const currentBouquet = bouquets.find(b => b.id === selectedBouquet);
-  const filteredChannels = currentBouquet
-    ? currentBouquet.channels.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
-    : [];
+  const filtered = bouquet.channels.filter(c =>
+    c.name.toLowerCase().includes(search.toLowerCase())
+  );
+  const liveCount = bouquet.channels.filter(c => c.isLive).length;
 
   return (
-    <div className="flex h-screen" style={{ height: "calc(100vh - 57px)" }}>
-
-      {/* LEFT: Bouquet list */}
+    <div className="min-h-full">
+      {/* Header */}
       <div
-        className="flex-shrink-0 overflow-y-auto"
+        className="sticky top-0 z-10 px-4 sm:px-6 py-4"
         style={{
-          width: "260px",
-          background: "rgba(6,10,24,0.6)",
-          borderRight: "1px solid rgba(59,130,246,0.1)",
-          scrollbarWidth: "none",
+          background: "rgba(6,10,24,0.85)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(255,255,255,0.05)",
         }}
       >
-        <div className="p-4">
-          <h2 className="text-white font-bold text-base mb-1">📦 Buketi</h2>
-          <p className="text-slate-500 text-xs mb-4">Odaberi paket kanala</p>
+        <div className="flex items-center gap-4 mb-4">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white transition-colors flex-shrink-0"
+            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}
+          >
+            <ArrowLeft size={16} /> Nazad
+          </button>
 
-          <div className="space-y-1.5">
-            {bouquets.map(b => (
-              <button
-                key={b.id}
-                onClick={() => { onSelectBouquet(b.id); setSearch(""); }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all"
-                style={{
-                  background: selectedBouquet === b.id
-                    ? `linear-gradient(135deg, ${b.color}22, ${b.color}11)`
-                    : "transparent",
-                  border: selectedBouquet === b.id
-                    ? `1px solid ${b.color}44`
-                    : "1px solid transparent",
-                }}
-              >
-                <span className="text-xl">{b.icon}</span>
-                <div className="flex-1 min-w-0">
-                  <p
-                    className="text-sm font-semibold truncate"
-                    style={{ color: selectedBouquet === b.id ? "white" : "rgba(148,163,184,0.8)" }}
-                  >
-                    {b.name}
-                  </p>
-                  <p className="text-xs text-slate-500 truncate">{b.count} kanala</p>
-                </div>
-                {selectedBouquet === b.id && (
-                  <div
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ background: b.color, boxShadow: `0 0 6px ${b.color}` }}
-                  />
-                )}
-              </button>
-            ))}
+          <div className="flex items-center gap-3 min-w-0">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+              style={{ background: `${bouquet.color}22`, border: `1px solid ${bouquet.color}44` }}
+            >
+              {bouquet.icon}
+            </div>
+            <div className="min-w-0">
+              <h2 className="text-white font-bold text-base sm:text-lg truncate">{bouquet.name}</h2>
+              <p className="text-slate-500 text-xs">{bouquet.description}</p>
+            </div>
           </div>
+
+          <div className="ml-auto flex items-center gap-3 flex-shrink-0">
+            <div
+              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold"
+              style={{ background: "rgba(239,68,68,0.12)", color: "#ef4444", border: "1px solid rgba(239,68,68,0.2)" }}
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+              {liveCount} LIVE
+            </div>
+            <span className="text-xs font-semibold hidden sm:block" style={{ color: bouquet.color }}>
+              {bouquet.count} kanala
+            </span>
+          </div>
+        </div>
+
+        {/* Search */}
+        <div
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl"
+          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}
+        >
+          <Search size={15} className="text-slate-400 flex-shrink-0" />
+          <input
+            className="bg-transparent text-white text-sm flex-1 outline-none placeholder-slate-500"
+            placeholder={`Pretraži ${bouquet.name}...`}
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
         </div>
       </div>
 
-      {/* RIGHT: Channel list */}
-      <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
-        {!currentBouquet ? (
-          /* Empty state */
-          <div className="flex flex-col items-center justify-center h-full text-center px-8">
-            <div
-              className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-              style={{ background: "rgba(59,130,246,0.1)", border: "1px solid rgba(59,130,246,0.2)" }}
-            >
-              <Tv size={36} className="text-blue-400" />
-            </div>
-            <h3 className="text-white text-xl font-bold mb-2">Odaberi buket</h3>
-            <p className="text-slate-400 text-sm max-w-xs">
-              Odaberi jedan od paketa s lijeve strane da vidiš dostupne kanale
-            </p>
-            <div className="grid grid-cols-4 gap-3 mt-8">
-              {bouquets.slice(0, 4).map(b => (
-                <button
-                  key={b.id}
-                  onClick={() => onSelectBouquet(b.id)}
-                  className="flex flex-col items-center gap-2 p-4 rounded-xl transition-all"
-                  style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.06)",
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = "rgba(59,130,246,0.08)"}
-                  onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.04)"}
-                >
-                  <span className="text-2xl">{b.icon}</span>
-                  <span className="text-xs text-slate-300 font-medium">{b.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="p-6">
-            {/* Bouquet header */}
-            <div
-              className="flex items-center gap-4 p-5 rounded-2xl mb-6"
-              style={{
-                background: `linear-gradient(135deg, ${currentBouquet.color}22, ${currentBouquet.color}08)`,
-                border: `1px solid ${currentBouquet.color}33`,
-              }}
-            >
-              <span className="text-4xl">{currentBouquet.icon}</span>
-              <div className="flex-1">
-                <h2 className="text-white text-xl font-bold">{currentBouquet.name}</h2>
-                <p className="text-slate-400 text-sm">{currentBouquet.description}</p>
-              </div>
-              <div className="text-right">
-                <p className="text-2xl font-black" style={{ color: currentBouquet.color }}>{currentBouquet.count}</p>
-                <p className="text-slate-500 text-xs">kanala</p>
-              </div>
-            </div>
-
-            {/* Search */}
-            <div
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl mb-4"
-              style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}
-            >
-              <Search size={15} className="text-slate-400" />
-              <input
-                className="bg-transparent text-white text-sm flex-1 outline-none placeholder-slate-500"
-                placeholder={`Pretraži ${currentBouquet.name}...`}
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-              />
-            </div>
-
-            {/* Live indicator row */}
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-xs text-slate-400">
-                {filteredChannels.filter(c => c.isLive).length} kanala uživo
-              </span>
-            </div>
-
-            {/* Channel list */}
-            <div className="space-y-1.5">
-              {filteredChannels.map((ch, i) => (
-                <ChannelRow key={ch.id} ch={ch} index={i} />
-              ))}
-            </div>
+      {/* Channel list */}
+      <div className="p-4 sm:p-6 space-y-2">
+        {filtered.map((ch, i) => (
+          <ChannelRow key={ch.id} ch={ch} index={i} />
+        ))}
+        {filtered.length === 0 && (
+          <div className="text-center py-16 text-slate-500 text-sm">
+            Nema rezultata za "{search}"
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Export ──────────────────────────────────────────────────────────────
+export default function BouquetPanel() {
+  const [selected, setSelected] = useState(null);
+
+  if (selected) {
+    return <ChannelView bouquet={selected} onBack={() => setSelected(null)} />;
+  }
+
+  return (
+    <div className="px-4 sm:px-6 py-8">
+      {/* Page title */}
+      <div className="mb-8">
+        <h1 className="text-white text-2xl sm:text-3xl font-bold mb-1">📺 Live TV</h1>
+        <p className="text-slate-400 text-sm">Odaberi buket za pregled dostupnih kanala</p>
+      </div>
+
+      {/* Bouquet grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {bouquets.map(b => (
+          <BouquetCard key={b.id} bouquet={b} onSelect={setSelected} />
+        ))}
       </div>
     </div>
   );
