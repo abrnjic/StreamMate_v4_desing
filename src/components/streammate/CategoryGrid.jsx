@@ -220,52 +220,55 @@ function CategoryCard({ cat, onSelect }) {
   );
 }
 
+function CategoryRow({ title, subtitle, accentColor, cats, onSelect }) {
+  return (
+    <div>
+      {/* Row header */}
+      <div className="flex items-center justify-between mb-4 px-3 sm:px-6">
+        <div>
+          <h2 className="text-white text-xl font-bold">{title}</h2>
+          <p className="text-slate-500 text-xs mt-0.5">{subtitle}</p>
+        </div>
+        <button
+          className="flex items-center gap-1 text-xs font-medium flex-shrink-0"
+          style={{ color: accentColor }}
+        >
+          Sve <ChevronRight size={14} />
+        </button>
+      </div>
+
+      {/* Horizontally scrollable row */}
+      <div
+        className="flex gap-3 overflow-x-auto px-3 sm:px-6 pb-3"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {cats.map(cat => (
+          <div key={cat.id} className="flex-shrink-0" style={{ width: "220px" }}>
+            <CategoryCard cat={cat} onSelect={onSelect} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function CategoryGrid({ onSelect }) {
   return (
-    <div className="px-3 sm:px-6 py-6 space-y-8">
-      {/* Films section */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h2 className="text-white text-xl font-bold">🎬 Kategorije filmova</h2>
-            <p className="text-slate-500 text-xs mt-0.5">Odaberi žanr koji te zanima</p>
-          </div>
-          <button
-            className="flex items-center gap-1 text-xs font-medium"
-            style={{ color: "#3b82f6" }}
-          >
-            Sve <ChevronRight size={14} />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {categories.map(cat => (
-            <CategoryCard key={cat.id} cat={cat} onSelect={onSelect} />
-          ))}
-        </div>
-      </div>
-
-      {/* Series section */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h2 className="text-white text-xl font-bold">🎭 Kategorije serija</h2>
-            <p className="text-slate-500 text-xs mt-0.5">TV serije po žanrovima</p>
-          </div>
-          <button
-            className="flex items-center gap-1 text-xs font-medium"
-            style={{ color: "#6366f1" }}
-          >
-            Sve <ChevronRight size={14} />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {seriesCategories.map(cat => (
-            <CategoryCard key={cat.id} cat={cat} onSelect={onSelect} />
-          ))}
-        </div>
-      </div>
+    <div className="py-6 space-y-8">
+      <CategoryRow
+        title="🎬 Kategorije filmova"
+        subtitle="Odaberi žanr koji te zanima"
+        accentColor="#3b82f6"
+        cats={categories}
+        onSelect={onSelect}
+      />
+      <CategoryRow
+        title="🎭 Kategorije serija"
+        subtitle="TV serije po žanrovima"
+        accentColor="#6366f1"
+        cats={seriesCategories}
+        onSelect={onSelect}
+      />
     </div>
   );
 }
