@@ -83,7 +83,7 @@ export default function SplashScreen() {
         {/* Logo */}
         <div className="mb-6 flex flex-col items-center">
           <img
-            src="https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/f2451d2f9_Slikazaslona2026-06-03u062321.png"
+            src="https://media.base44.com/images/public/6a1fa590cdfcf0990345869c/675135202_generated_image.png"
             alt="StreamMate"
             className="w-56 sm:w-64"
             style={{ filter: "drop-shadow(0 0 32px rgba(99,102,241,0.7))" }}
