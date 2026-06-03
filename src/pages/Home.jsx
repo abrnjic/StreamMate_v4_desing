@@ -4,6 +4,7 @@ import NavBar from "@/components/streammate/NavBar";
 import HeroBanner from "@/components/streammate/HeroBanner";
 import ContentRow from "@/components/streammate/ContentRow";
 import CategoryGrid from "@/components/streammate/CategoryGrid";
+import FavoritesRow from "@/components/streammate/FavoritesRow";
 import { ChevronRight } from "lucide-react";
 
 const sections = [
@@ -63,7 +64,11 @@ export default function Home() {
         {sections.map(section => (
           <div key={section.id}>
             <SectionHeader label={section.label} sub={section.sub} />
-            <ContentRow section={section.id} />
+            {section.id === "favorites" ? (
+              <FavoritesRow />
+            ) : (
+              <ContentRow section={section.id} />
+            )}
           </div>
         ))}
       </div>

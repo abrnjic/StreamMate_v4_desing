@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import { Play, Star, Volume2, VolumeX } from "lucide-react";
+import { useState, useRef } from "react";
+import { Play, Star, Volume2, VolumeX, Heart } from "lucide-react";
+import { useFavorites } from "@/hooks/useFavorites";
 
 /**
  * VideoPreviewCard — kartica s video preview-om na hover.
@@ -14,6 +15,7 @@ export default function VideoPreviewCard({ item, type, onClick }) {
   const [muted, setMuted] = useState(true);
   const hoverTimer = useRef(null);
   const videoRef = useRef(null);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   // Demo video sources per genre/color — u produkciji bi ovo bili pravi trailer URLovi
   const demoVideos = [
@@ -194,6 +196,26 @@ export default function VideoPreviewCard({ item, type, onClick }) {
             <Play size={20} fill="white" className="text-white ml-0.5" />
           </div>
         </div>
+
+        {/* Favorite heart button */}
+        <button
+          onClick={e => { e.stopPropagation(); toggleFavorite(item, type); }}
+          className="absolute bottom-2 left-2 w-7 h-7 rounded-full flex items-center justify-center transition-all"
+          style={{
+            background: isFavorite(item.id, type) ? "rgba(239,68,68,0.85)" : "rgba(0,0,0,0.55)",
+            backdropFilter: "blur(8px)",
+            border: isFavorite(item.id, type) ? "1px solid rgba(239,68,68,0.6)" : "1px solid rgba(255,255,255,0.12)",
+            opacity: hovered || isFavorite(item.id, type) ? 1 : 0,
+            transform: isFavorite(item.id, type) ? "scale(1.1)" : "scale(1)",
+            transition: "opacity 0.2s, transform 0.2s, background 0.2s",
+          }}
+        >
+          <Heart
+            size={13}
+            fill={isFavorite(item.id, type) ? "white" : "none"}
+            style={{ color: isFavorite(item.id, type) ? "white" : "rgba(239,68,68,0.8)" }}
+          />
+        </button>
 
         {/* Accent border on hover */}
         <div
