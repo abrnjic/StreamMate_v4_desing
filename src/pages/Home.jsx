@@ -5,10 +5,12 @@ import HeroBanner from "@/components/streammate/HeroBanner";
 import ContentRow from "@/components/streammate/ContentRow";
 import CategoryGrid from "@/components/streammate/CategoryGrid";
 import FavoritesRow from "@/components/streammate/FavoritesRow";
+import NewArrivalsRow from "@/components/streammate/NewArrivalsRow";
 import { ChevronRight } from "lucide-react";
 
 const sections = [
   { id: "live", label: "📺 Live TV", sub: "Kanali uživo" },
+  { id: "new", label: "✨ Novo u ponudi", sub: "Najnoviji filmovi i serije" },
   { id: "favorites", label: "⭐ Favoriti", sub: "Omiljeni sadržaj" },
   { id: "movies", label: "🎬 Filmovi", sub: "Filmovi na zahtjev" },
   { id: "series", label: "🎭 Serije", sub: "TV serije" },
@@ -66,6 +68,8 @@ export default function Home() {
             <SectionHeader label={section.label} sub={section.sub} />
             {section.id === "favorites" ? (
               <FavoritesRow />
+            ) : section.id === "new" ? (
+              <NewArrivalsRow />
             ) : (
               <ContentRow section={section.id} />
             )}
