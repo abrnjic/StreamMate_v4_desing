@@ -71,14 +71,13 @@ export default function SplashScreen() {
 
       {/* Glass card */}
       <div
-        className="relative z-10 flex flex-col items-center px-16 py-14 rounded-3xl"
+        className="relative z-10 flex flex-col items-center w-full max-w-sm mx-4 px-8 py-12 rounded-3xl sm:px-16 sm:py-14"
         style={{
           background: "rgba(13, 27, 62, 0.55)",
           backdropFilter: "blur(24px)",
           WebkitBackdropFilter: "blur(24px)",
           border: "1px solid rgba(59, 130, 246, 0.2)",
           boxShadow: "0 8px 80px rgba(59,130,246,0.12), inset 0 1px 0 rgba(255,255,255,0.08)",
-          minWidth: "420px",
         }}
       >
         {/* Logo */}

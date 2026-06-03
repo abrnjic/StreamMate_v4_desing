@@ -55,7 +55,7 @@ export default function HeroBanner() {
   return (
     <div
       className="relative w-full overflow-hidden"
-      style={{ height: "480px", borderRadius: "0 0 0 0" }}
+      style={{ height: "clamp(260px, 50vw, 480px)" }}
     >
       {/* Background image */}
       <div
@@ -85,13 +85,13 @@ export default function HeroBanner() {
 
       {/* Content */}
       <div
-        className="absolute inset-0 flex flex-col justify-end p-8"
+        className="absolute inset-0 flex flex-col justify-end p-4 sm:p-8"
         style={{ opacity: fade ? 1 : 0, transition: "opacity 0.4s ease" }}
       >
         {/* Tag */}
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-2 mb-2">
           <span
-            className="text-xs font-bold px-2 py-1 rounded"
+            className="text-xs font-bold px-2 py-0.5 rounded"
             style={{ background: item.tagColor, color: "white", letterSpacing: "0.1em" }}
           >
             {item.tag}
@@ -101,45 +101,45 @@ export default function HeroBanner() {
 
         {/* Title */}
         <h1
-          className="text-5xl font-bold text-white mb-2"
+          className="text-2xl sm:text-5xl font-bold text-white mb-1 sm:mb-2"
           style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)", lineHeight: 1.1 }}
         >
           {item.title}
         </h1>
-        <p className="text-sm text-blue-400 mb-3 font-medium">{item.subtitle}</p>
-        <p className="text-sm text-slate-300 mb-6 max-w-md leading-relaxed">{item.description}</p>
+        <p className="text-xs sm:text-sm text-blue-400 mb-1 sm:mb-3 font-medium">{item.subtitle}</p>
+        <p className="hidden sm:block text-sm text-slate-300 mb-6 max-w-md leading-relaxed">{item.description}</p>
 
         {/* Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 mt-2 sm:mt-0">
           <button
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all"
+            className="flex items-center gap-1.5 px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all"
             style={{
               background: "linear-gradient(135deg, #3b82f6, #6366f1)",
               color: "white",
               boxShadow: "0 0 20px rgba(99,102,241,0.4)",
             }}
           >
-            <Play size={16} fill="white" /> Gledaj
+            <Play size={14} fill="white" /> Gledaj
           </button>
           <button
-            className="flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm text-white transition-all"
+            className="flex items-center gap-1.5 px-3 sm:px-5 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm text-white transition-all"
             style={{
               background: "rgba(255,255,255,0.1)",
               border: "1px solid rgba(255,255,255,0.15)",
               backdropFilter: "blur(8px)",
             }}
           >
-            <Info size={16} /> Više info
+            <Info size={14} /> Info
           </button>
           <button
-            className="ml-auto p-3 rounded-xl text-slate-400 transition-all"
+            className="ml-auto p-2 sm:p-3 rounded-xl text-slate-400 transition-all"
             style={{
               background: "rgba(255,255,255,0.08)",
               border: "1px solid rgba(255,255,255,0.1)",
             }}
             onClick={() => setMuted(!muted)}
           >
-            {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
           </button>
         </div>
       </div>

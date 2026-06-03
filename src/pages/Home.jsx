@@ -52,7 +52,7 @@ export default function Home() {
       <HeroBanner />
 
       {/* Content sections */}
-      <div className="px-6 py-8 space-y-10">
+      <div className="px-3 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-10">
         {sections.map(section => (
           <div key={section.id}>
             <SectionHeader label={section.label} sub={section.sub} />
@@ -61,8 +61,8 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Bottom padding for mobile */}
-      <div className="h-8" />
+      {/* Bottom padding for mobile nav */}
+      <div className="h-8 md:h-4 pb-16 md:pb-0" />
     </div>
   );
 }
