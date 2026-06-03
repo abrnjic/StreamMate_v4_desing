@@ -1,5 +1,6 @@
 import { Tv, Film, Clapperboard, Heart, Video, Settings, Search, Bell } from "lucide-react";
 import BrandLogo from "@/components/streammate/BrandLogo";
+import ProfileMenu from "@/components/streammate/ProfileMenu";
 
 const navItems = [
   { icon: Tv, label: "Live TV", id: "live" },
@@ -66,9 +67,7 @@ export default function NavBar({ active, onSelect }) {
             <Bell size={18} />
             <div className="absolute top-1.5 right-1.5 rounded-full" style={{ width: "6px", height: "6px", background: "#3b82f6" }} />
           </button>
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white" style={{ background: "linear-gradient(135deg, #3b82f6, #6366f1)" }}>
-            U
-          </div>
+          <ProfileMenu size={34} />
         </div>
       </div>
 
@@ -87,9 +86,7 @@ export default function NavBar({ active, onSelect }) {
           <button className="p-2 rounded-lg text-slate-400" style={{ background: "rgba(255,255,255,0.07)" }}>
             <Search size={17} />
           </button>
-          <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: "linear-gradient(135deg, #3b82f6, #6366f1)" }}>
-            U
-          </div>
+          <ProfileMenu size={30} />
         </div>
       </div>
 
