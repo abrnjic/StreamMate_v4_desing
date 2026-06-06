@@ -8,6 +8,7 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import ScrollToTop from './components/ScrollToTop';
 // Add page imports here
 import SplashScreen from "./pages/SplashScreen";
+import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import LiveTV from "./pages/LiveTV";
 import Movies from "./pages/Movies";
@@ -43,7 +44,8 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       {/* Add your page Route elements here */}
-      <Route path="/" element={<SplashScreen />} />
+      <Route path="/" element={<Landing />} />
+      <Route path="/splash" element={<SplashScreen />} />
       <Route path="/home" element={<Home />} />
       <Route path="/live-tv" element={<LiveTV />} />
       <Route path="/movies" element={<Movies />} />
